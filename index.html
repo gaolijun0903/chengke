@@ -9,7 +9,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="format-detection" content="telephone=no">
-    <title>乘客报名</title>
+    <title>0元抢易享VIP会员</title>
+    <!--<link rel="stylesheet" type="text/css" href="css/index.css"/>-->
     <style type="text/css">
 [v-cloak] {display: none;}
 html, body { position: relative; height: 100%;}
@@ -19,18 +20,141 @@ ul,li{	list-style: none;}
 a{	text-decoration: none;}
 input{ border: none; outline: none; }
 
-.appwrapper{padding-bottom: 1.8;}
-  	
+.appwrapper{padding-bottom: 1.8rem; height: 100%; color: #efc3a6; background-color: #0e0704}
+.container{
+	width: 100%;height: 100%;
+}	
+.header{
+	width: 100%;
+	height: 10.533333rem;
+	background:url(img/bg.png);
+	background-size: 100% 100%;
+}
+.main{
+	height: 3.466667rem;
+}
+.main .top{
+	height: 2.666667rem;
+	border:1px solid red;
+}
+.main .progresswrapper{
+	margin-top: 0.133333rem;
+	text-align: center;
+}
+.main .progresswrapper .citytotalnum{
+	font-size: 0.5rem;
+}
+.main .progresswrapper .progressbox{
+	margin: 0.426667rem auto 0.3rem;
+	width: 6.666667rem;
+	height: 0.16rem;
+	border:1px solid #efc3a6;
+	border-radius: 0.05rem;
+}
+.main .progresswrapper .progressbox .progressline{
+	height: 100%;
+	background-color: #efc3a6;
+	border-radius: 0.05rem;
+}
+.main .progresswrapper .joinnumtext{
+	font-size: 0.32rem;
+	letter-spacing: 0.10rem;
+}
+.main .progresswrapper .nums{
+	color: #FFFFFF;
+}
+.main .btnwrapper{
+	padding:0 0.8rem;
+}
+.main .btnwrapper .btn{
+display: inline-block;
+width: 4.0rem;
+height: 1.0rem;
+font-size: 0.373333rem;
+line-height: 1.0rem;
+text-align: center;
+border:1px solid #efc3a6;
+border-radius: 0.5rem;
+}
+.main .btnwrapper .btn.join{
+	background-color:  #efc3a6;
+	margin-right: 0.2rem;
+	color: #040101;
+}
+.main .notice{
+text-align: center;
+font-size: 0.48rem;
+line-height: 0.86rem;
+}
+.footer{
+	margin-top: 1.0rem;
+	border:1px solid red;
+}
+.footer .rulebtn{
+	margin: 0 auto;
+	width: 5.0rem;
+	height: 1.0rem;
+	font-size: 0.4rem;
+	text-align: center;
+	line-height: 1.0rem;
+	border:1px solid red;
+}
+
+
+
+
+
+
+.toastmsg{ position: fixed; bottom: 35%; left: 10%; width: 80%; height: 40px; line-height: 40px; background: rgba(0,0,0,0.5); color: #fff; z-index: 30; text-align: center; border-radius: 10px;font-size: 18px;}
+.slide-up-fade-enter-active { transition: all .3s ease; }
+.slide-up-fade-leave-active { transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0); }
+.slide-up-fade-enter , .slide-up-fade-leave-to { transform: translateY(100px); opacity: 0; }
     </style>
 </head>
 <body>
 	<div id="app" class="appwrapper" v-cloak>
 		<div class="container">
 			<header class="header">
-				<h1 class="maintitle">报名抢易到VIP会员</h1>
+				<!--<h1 class="maintitle">0元抢易享VIP会员</h1>
 				<h2 class="subtitle">打车9折+免费升舱等你拿！</h2>
-				<h3 class="citytitle">北京站报名满20万立即免费送</h3>
+				-->
 			</header>
+			<div class="main">
+				<div class="maintabs" v-if="isInCitylist==1">
+					<div class="top progresswrapper">
+						<div class="citytotalnum" v-if="isComplete==0">{{cityName}}站报名满<span class="nums" v-text="cityTotalNum"></span>即免费送</div>
+						<div class="citytotalnum" v-if="isComplete==1">{{cityName}}站报名已满，可以预约下期哦</div>
+						<div class="progressbox">
+							<div class="progressline" :style="{'width':percent+'%'}"></div>
+						</div>
+						<div class="joinnumtext">已有<span class="nums" v-text="joinnum"></span>人报名,进度<span id="joinnum" v-text="percent"></span>%</div>
+					</div>
+					<div class="btnwrapper">
+						<div class="btn join" @click="joinNow" v-if="isComplete==0">立即0元报名</div>
+						<div class="btn join" @click="appointmentNow" v-if="isComplete==1">预约报名</div>
+						<div class="btn " @click="showRightInfo">了解易享VIP会员</div>
+					</div>
+				</div>
+				<div class="maintabs" v-if="isInCitylist==0"> 
+					<div class="top notice">
+						<div>您所在的城市报名通道还未开启，</div>
+						<div>可以先预约哦！</div>
+					</div>
+					<div class="btnwrapper">
+						<div class="btn join" @click="appointmentNow">预约报名</div>
+						<div class="btn " @click="showRightInfo">了解易享VIP会员</div>
+					</div>
+				</div>
+			</div>
+			
+			<footer class="footer">
+				<div class="rulebtn" @click="showRules">活动规则 &gt;</div>
+			</footer>
+			
+			<transition name="slide-up-fade">
+				<div class="toastmsg" v-show="showToast" v-html="toastMsg"></div>
+			</transition>
+		
 		</div>
 	</div>
 	<!--ga-->
@@ -45,25 +169,202 @@ input{ border: none; outline: none; }
 new Vue({
   	el: '#app',
 	data:{
-	  	
+		domain:'https://testing.market.yongChe.Org',
+		//domain:'https://market.yongChe.com',
+		isLogin:false,  //登录状态，false->未登录，true->登录
+		cityName:null,
+		cityShort:null,
+		isInCitylist:null,  //0-47城外，1-47城内
+		isComplete:null,  //0->报名已满可预约，1-立即报名
+		cityTotalNum:null,
+	  	joinnum:null,
+	  	leftnum:null,
+	  	percent:null,  //已报名百分比
+	  	showToast:false,  //吐司提示框的展示与否  false-不展示，true-展示
+	  	toastMsg:'' //吐司提示信息
   	},
 	computed:{
 		
 	},
 	mounted: function(){
-	    
-	  	this.initData();
+	  	this.getLoginStatus();
 	},
 	methods:{
-	  	initData:function (){
-	  		var vm = this;
-	  		console.log('init');
-	  		this.info = {
-		  		name:'happy',
-		  		identity:'130521***3445'
-		  	}
-	  		this.getCurrentPosition();
-	  		this.initArea();
+		getLoginStatus:function(){  //获取登录状态
+			var vm = this;
+			vm.isLogin = true;
+			if(vm.isLogin){
+				vm.getCurrentPosition();
+			}else{
+				//跳端上登录页
+			}
+			/*$.ajax({
+	  			type:"(get)",
+	  			url:"",
+	  			//dataType:'jsonp',
+	  			//xhrFields: {
+                //    withCredentials: true
+                //},
+                //crossDomain: true,
+                success:function(data) {
+                	if(data.code==200){
+                		vm.isLogin = data.result.isLogin;
+                		if(vm.isLogin){
+							vm.getCurrentPosition();
+						}else{
+							//跳端上登录页
+						}
+                	}
+                },
+                error:function(err){
+                    vm.showToastFn(err.msg)
+                }
+	  		});*/
+		},
+		getCurrentPosition:function(){  //H5获取定位
+			var vm = this;
+			if(navigator.geolocation){
+				navigator.geolocation.getCurrentPosition(function (position) {
+			      	var lat = position.coords.latitude;
+			      	var lng = position.coords.longitude;
+			      	vm.positionToCity(lat,lng);//经纬度转为城市简码
+			    },function(err){
+			        //alert('error');  //TODO
+			        vm.getCityInfo(''); //如果H5未获取到定位，默认为"",由后台返回注册城市信息
+			    },{timeout: 2500,});
+			}
+		},
+		positionToCity:function(lat,lng){//把经纬度转为城市简码
+			var vm = this;
+			$.ajax({
+	            url:'https://www.yongche.com/greencar/ajax/get_city.php',
+	            type:'POST',
+	            dataType:"json",
+	            data:{lat:lat,lng:lng},
+	            success:function(data){
+	                if(data.code==200){
+	                    vm.cityShort = data.result.short;
+	                    vm.cityName = data.result.city;
+	                    vm.getCityInfo(vm.cityShort);
+	                }else{
+	                	vm.showToastFn(data.code) //TODO
+	                }
+	            },
+                error:function(err){
+                    vm.showToastFn(err.msg)
+                }
+	        })
+		},
+		getCityInfo:function(cityshort){ //获取乘客所在城市信息 getCommen，参数城市简码非必填
+			var vm = this;
+			vm.cityShort = 'bj';
+	        vm.cityName = '北京';
+	        vm.isInCitylist = 1;  //0->47城外，1->47城内
+	        vm.isComplete = 0;  //是否报名已满，0->未报满，1->已报满
+	        vm.joinStatus = 0; //0->没报过名，1->
+		    vm.cityTotalNum = 200;
+	  	 	vm.joinnum = 22;
+	  	 	vm.leftnum = 178;
+	  	 	vm.percent = 9;
+			/*$.ajax({
+	  			type:"(get)",
+	  			url:"?type=app&cityshort="+cityshort+"",
+	  			//dataType:'jsonp',
+	  			//xhrFields: {
+                //    withCredentials: true
+                //},
+                //crossDomain: true,
+                success:function(data) {
+                	if(data.code==200){
+                		vm.isInCitylist = data.inCity;  //0--47城外 1--47城内
+	                	vm.joinStatus = data.isJoin;  //0--没有报过名 1--报名成功 2--城市名额满了 预约成功 3--47城外预约成功
+						vm.cityShort = data.cityInfo.city;
+						vm.cityName = data.cityInfo.cityName;
+						vm.cityTotalNum = data.cityInfo.totalCt;
+						vm.joinnum = data.cityInfo.nowCt;
+						vm.leftnum = data.cityInfo.needCt;
+						vm.percent = data.cityInfo.perNum;
+						
+						if(vm.joinStatus==0){//没报过名
+							if(vm.percent==100){  //没报过名，但是名额已满
+								vm.isComplete = 1;   //展示预约报名按钮
+							}else{
+								vm.isComplete = 0;
+							}
+						}else if(vm.joinStatus==1){//报名成功--跳结果页
+							window.location.href = ""
+						}else if(vm.joinStatus==2){//47城内预约结果页
+							window.location.href = "?city="+vm.cityName+"&isInCitylist="+vm.isInCitylist+"&inapp=1"
+						}else if（vm.joinStatus==3）{//47城外预约成功
+							
+						}
+                	}
+                	
+                },
+                error:function(err){
+                    vm.showToastFn(err.msg)
+                }
+	  		});*/
+		},
+		joinNow:function(){//立即报名  参数城市简码
+			alert('立即报名')
+			/*$.ajax({
+	  			type:"(get)",
+	  			url:"",
+	  			//dataType:'jsonp',
+	  			//xhrFields: {
+                //    withCredentials: true
+                //},
+                //crossDomain: true,
+                success:function(data) {
+                	if(data.code==200){//报名成功跳结果页
+                		window.location.href = ""
+                	}else{
+                		
+                	}
+                	
+                },
+                error:function(err){
+                    vm.showToastFn(err.msg)
+                }
+	  		});*/
+		},
+		appointmentNow:function(){//预约报名
+			alert('预约报名')
+			/*$.ajax({
+	  			type:"(get)",
+	  			url:"",
+	  			//dataType:'jsonp',
+	  			//xhrFields: {
+                //    withCredentials: true
+                //},
+                //crossDomain: true,
+                success:function(data) {
+                	if(data.code==200){//报名成功跳结果页
+                		window.location.href = ""
+                	}else{
+                		
+                	}
+                	
+                },
+                error:function(err){
+                    vm.showToastFn(err.msg)
+                }
+	  		});*/
+		},
+		showRightInfo:function(){//了解VIP会员特权
+			//window.location.href = ""
+		},
+		showRules:function(){//查看活动规则
+			//window.location.href = ""
+		},
+		showToastFn:function(msg){
+			var vm = this;
+			vm.showToast = true;
+     		vm.toastMsg = msg;
+     		setTimeout(function(){
+     			vm.showToast = false;
+     		},2000)
 		}
 		
   },

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <title>0元抢易享VIP会员</title>
+    <!--<link rel="stylesheet" type="text/css" href="css/index.css"/>-->
+    <style type="text/css">
+[v-cloak] {display: none;}
+html, body { position: relative; height: 100%;}
+body { font-family: Helvetica Neue, Helvetica, Arial, sans-serif; color:#000; margin: 0; padding: 0; }
+*{padding: 0;	margin: 0;	box-sizing: border-box;}
+ul,li{	list-style: none;}
+a{	text-decoration: none;}
+input{ border: none; outline: none; }
+
+.appwrapper{padding-bottom: 1.8rem; height: 100%; color: #efc3a6; background-color: #0e0704}
+.container{
+	width: 100%;height: 100%;padding: 0.1px;
+}	
+.header{
+	width: 100%;
+	height: 5.6rem;	
+}
+.header .yuyuebg{
+	margin: 1.6rem auto 0;
+	height: 1.16rem;
+	width: 5.28rem;
+	background:url(img/yuyuebg.png);
+	background-size: 100% 100%;
+}
+.main{
+	height: 3.466667rem;
+	/*padding-bottom:0.1px;*/
+}
+.main .top{
+	margin-bottom: 5.733333rem;
+}
+.main .notice{
+	font-size: 0.506667rem;
+	text-align: center;
+}
+
+.main .btnwrapper{
+	padding:0 0.8rem;
+}
+.main .btnwrapper .btn{
+display: inline-block;
+width: 4.0rem;
+height: 1.0rem;
+font-size: 0.373333rem;
+line-height: 1.0rem;
+text-align: center;
+border:1px solid #efc3a6;
+border-radius: 0.5rem;
+}
+.main .btnwrapper .btn.join{
+	background-color:  #efc3a6;
+	margin-right: 0.2rem;
+	color: #040101;
+}
+
+.footer{
+	margin-top: 1.0rem;
+	border:1px solid red;
+}
+.footer .rulebtn{
+	margin: 0 auto;
+	width: 5.0rem;
+	height: 1.0rem;
+	font-size: 0.4rem;
+	text-align: center;
+	line-height: 1.0rem;
+	border:1px solid red;
+}
+
+
+
+.toastmsg{ position: fixed; bottom: 35%; left: 10%; width: 80%; height: 40px; line-height: 40px; background: rgba(0,0,0,0.5); color: #fff; z-index: 30; text-align: center; border-radius: 10px;font-size: 18px;}
+.slide-up-fade-enter-active { transition: all .3s ease; }
+.slide-up-fade-leave-active { transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0); }
+.slide-up-fade-enter , .slide-up-fade-leave-to { transform: translateY(100px); opacity: 0; }
+    </style>
+</head>
+<body>
+	<div id="app" class="appwrapper" v-cloak>
+		<div class="container">
+			<header class="header">
+				<div class="yuyuebg"></div>
+			</header>
+			<div class="main">
+				<div class="maintabs" v-if="inapp==1">
+					<div class="top notice">
+						<div class="citytotalnum" v-if="isInCitylist==1">{{cityName}}站下期报名开启后，</div>
+						<div class="citytotalnum" v-if="isInCitylist==0">您所在的城市开启报名后，</div>
+						<div class="citytotalnum">将在第一时间以短信形式通知您</div>
+					</div>
+					<div class="btnwrapper">
+						<div class="btn join" @click="shareToFriendAPP">邀好友报名</div>
+						<div class="btn " @click="showRightInfo">了解易享VIP会员</div>
+					</div>
+				</div>
+				<div class="maintabs" v-if="inapp==null"> 
+					<div class="top notice">
+						<div class="citytotalnum">您所在的城市开启报名后，</div>
+						<div>将在第一时间以短信形式通知您！</div>
+					</div>
+					<div class="btnwrapper">
+						<div class="btn join" @click="downloadApp">下载易到APP</div>
+						<div class="btn " @click="shareToFriend">邀好友报名</div>
+					</div>
+				</div>
+			</div>
+			
+			<footer class="footer">
+				<div class="rulebtn" @click="showRules">活动规则 &gt;</div>
+			</footer>
+			
+			<transition name="slide-up-fade">
+				<div class="toastmsg" v-show="showToast" v-html="toastMsg"></div>
+			</transition>
+		
+		</div>
+	</div>
+	<!--ga-->
+	
+<script src="https://i2.Yongche.name/s/js/201712/flexible.js?1478153218"></script>
+<script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://i3.Yongche.name/s/js/201711/vue.min.js?1478153218"></script>
+<!--<script src="<{asset:js/app/i/weixin/js-api.min.js}>"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>	-->
+
+<script type="text/javascript">
+new Vue({
+  	el: '#app',
+	data:{
+		domain:'https://testing.market.yongChe.Org',
+		//domain:'https://market.yongChe.com',
+		inapp:1,  //是否端内跳过来的，1->端内，null->端外
+		cityName:null,
+		isInCitylist:null,  //0-47城外，1-47城内
+	  	showToast:false,  //吐司提示框的展示与否  false-不展示，true-展示
+	  	toastMsg:'' //吐司提示信息
+  	},
+	computed:{
+		
+	},
+	mounted: function(){
+	  	this.init();
+	},
+	methods:{
+		init:function(){
+			//&city=北京&isInCitylist=1&inapp=1
+			this.cityName =this.getQueryString('city');
+			this.isInCitylist =this.getQueryString('isInCitylist');
+			this.inapp = this.getQueryString('inapp');
+		},
+		shareToFriendAPP:function(){//端内分享
+			
+		},
+		shareToFriend:function(){//二次分享
+			
+		},
+		downloadApp:function(){//下载乘客端
+			//window.location.href = ""
+		},
+		showRightInfo:function(){//了解VIP会员特权
+			//window.location.href = ""
+		},
+		showRules:function(){//查看活动规则
+			//window.location.href = ""
+		},
+		showToastFn:function(msg){
+			var vm = this;
+			vm.showToast = true;
+     		vm.toastMsg = msg;
+     		setTimeout(function(){
+     			vm.showToast = false;
+     		},2000)
+		},
+		getQueryString:function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+  },
+  watch:{
+  	
+  }
+})
+</script>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-18761483-4', 'auto');
+    ga('send', 'pageview');
+</script>
+</body>
+</html>

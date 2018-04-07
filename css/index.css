@@ -1,0 +1,97 @@
+[v-cloak] {display: none;}
+html, body { position: relative; height: 100%;}
+body { font-family: Helvetica Neue, Helvetica, Arial, sans-serif; color:#000; margin: 0; padding: 0; }
+*{padding: 0;	margin: 0;	box-sizing: border-box;}
+ul,li{	list-style: none;}
+a{	text-decoration: none;}
+input{ border: none; outline: none; }
+
+.appwrapper{padding-bottom: 1.8rem; height: 100%; color: #efc3a6; background-color: #0e0704}
+.container{
+	width: 100%;height: 100%;
+}	
+.header{
+	width: 100%;
+	height: 10.533333rem;
+	background:url(img/bg.png);
+	background-size: 100% 100%;
+}
+.main{
+	height: 3.466667rem;
+}
+.main .top{
+	height: 2.666667rem;
+	border:1px solid red;
+}
+.main .progresswrapper{
+	margin-top: 0.133333rem;
+	text-align: center;
+}
+.main .progresswrapper .citytotalnum{
+	font-size: 0.5rem;
+}
+.main .progresswrapper .progressbox{
+	margin: 0.426667rem auto 0.3rem;
+	width: 6.666667rem;
+	height: 0.16rem;
+	border:1px solid #efc3a6;
+	border-radius: 0.05rem;
+}
+.main .progresswrapper .progressbox .progressline{
+	height: 100%;
+	background-color: #efc3a6;
+	border-radius: 0.05rem;
+}
+.main .progresswrapper .joinnumtext{
+	font-size: 0.32rem;
+	letter-spacing: 0.10rem;
+}
+.main .progresswrapper .nums{
+	color: #FFFFFF;
+}
+.main .btnwrapper{
+	padding:0 0.8rem;
+}
+.main .btnwrapper .btn{
+display: inline-block;
+width: 4.0rem;
+height: 1.0rem;
+font-size: 0.373333rem;
+line-height: 1.0rem;
+text-align: center;
+border:1px solid #efc3a6;
+border-radius: 0.5rem;
+}
+.main .btnwrapper .btn.join{
+	background-color:  #efc3a6;
+	margin-right: 0.2rem;
+	color: #040101;
+}
+.main .notice{
+text-align: center;
+font-size: 0.48rem;
+line-height: 0.86rem;
+}
+.footer{
+	margin-top: 1.0rem;
+	border:1px solid red;
+}
+.footer .rulebtn{
+	margin: 0 auto;
+	width: 5.0rem;
+	height: 1.0rem;
+	font-size: 0.4rem;
+	text-align: center;
+	line-height: 1.0rem;
+	border:1px solid red;
+}
+
+
+
+
+
+
+.toastmsg{ position: fixed; bottom: 35%; left: 10%; width: 80%; height: 40px; line-height: 40px; background: rgba(0,0,0,0.5); color: #fff; z-index: 30; text-align: center; border-radius: 10px;font-size: 18px;}
+.slide-up-fade-enter-active { transition: all .3s ease; }
+.slide-up-fade-leave-active { transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0); }
+.slide-up-fade-enter , .slide-up-fade-leave-to { transform: translateY(100px); opacity: 0; }
