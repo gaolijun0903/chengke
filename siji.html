@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <title>易享车主卡</title>
+    <style type="text/css">
+[v-cloak] {display: none;}
+html, body { position: relative; height: 100%;}
+body { font-family: Helvetica Neue, Helvetica, Arial, sans-serif; color:#000; margin: 0; padding: 0; }
+*{padding: 0;	margin: 0;	box-sizing: border-box;}
+ul,li{	list-style: none;}
+a{	text-decoration: none;}
+input{ border: none; outline: none; }
+
+.appwrapper{padding-bottom: 1.8;}
+
+.headerbg{	position: relative;	width:100%;height: 9.453333rem;	padding-top:3.52rem; 
+	background: url(<{asset:media/g1/M01/1E/27/rBEAQ1rE0SeIEhxpAAFnE6sWE4IAAMAmgMCFPwAAWcr791.jpg}>);
+	background-size: 100% 100%;}
+.headerbg .title{display: none;}
+.headerbg .subtitle{margin-top: 0.333333rem;text-align: center;	font-size:0.506667rem;	line-height: 0.8rem;	color: #666666;}
+.headerbg .subtitle .joinnum{margin: 0 0.06rem;display: inline-block;width: 0.6rem;height: 0.8rem;font-size: 0.48rem;color: #ce544f;border:1px solid #666666;border-radius: 0.15rem;}
+
+.headerbg .citywrapper{position: absolute;top: 0.5rem;left: 1.0rem;height: 0.933333rem;font-size: 0.426667rem;line-height: 0.933333rem;}
+.headerbg .citywrapper .locationpng{display: inline-block;width:0.44rem;height: 0.453333rem;
+background: url(https://i2.yongChe.name/media/g1/M03/0C/1F/rBEAQ1rDEKGIPKLEAAADD_Dtz88AAE7lwP__LoAAANG771.png);
+background-size: 100% 100%;}
+
+.headerbg .sharebtn{ position: absolute; top: 0.3rem; right: 0.4rem; width: 0.80rem; height: 0.2rem; font-size: 0.50rem;    text-align: center;
+    background: url(https://i3.yongche.Name/media/g1/M03/1E/25/rBEAQ1rDdeWIdhFxAAAAwE2qxoYAAL_6AP__lYAAAGq239.png);
+	background-size: 100% 100%;}
+
+.headerbg .detailbtn{position: absolute; top: 0.893333rem;	right: 0;	width: 1.853333rem;	height: 0.54rem;
+	background: url(https://i1.yongche.Name/media/g1/M02/1E/27/rBEARFrEzKyITaCXAAAJXxL-KvMAAMAmAFDBIEAAAl3820.png);
+	background-size: 100% 100%;}
+
+.inputwrapper{margin: 0 auto 0.146667rem;width: 8.533333rem;text-align: center;font-size: 0.426667rem;line-height: 0.933333rem;color: #FFFFFF;}
+.inputwrapper .inputitem{margin-bottom: 0.466667rem;width: 100%;height: 0.933333rem;border-radius: 0.466667rem;background: #f0f0f0;overflow: hidden;}
+.inputwrapper .inputitem input{	display: -webkit-box;	height: 100%;	width: 100%;	font-size: 0.426667rem;	line-height: 0.933333rem;	color: #666666;	background: #f0f0f0;	padding-left: 1.066667rem;}
+.inputwrapper .codewrapper{	display: flex;}
+.inputwrapper .codewrapper .code-left{	flex: 1;}
+.inputwrapper .codewrapper .code-right{	width:3.666667rem;}
+.inputwrapper .imgcodewrapper  .imgcode{	width: 2.5rem;height: 100%;}
+.inputwrapper .msgcodewrapper .code-right .getcodebtn.able{	background: #e34d4b;}
+.inputwrapper .msgcodewrapper .code-right .getcodebtn.disable{	background: #aaa;}
+
+.successwrapper{ margin-top: 0.5rem;text-align: center;}
+.successwrapper .sucesstitle{	margin-bottom: 0.2rem;	font-size: 0.613333rem;	color: #1d1d1d;	font-weight: 500;}
+.successwrapper .successrank{font-size: 0.426667rem;line-height: 0.96rem;color: #666666;}
+.successwrapper .successrank .ranknum{color: #e34d4b;}
+
+.notice{	margin-bottom: 0.266667rem;	font-size:  0.373333rem;	color: #4579fe;	text-align: center;}
+
+.btnwrapper{	margin: 0 auto ;width: 8.533333rem;text-align: center;font-size: 0.533333rem;line-height: 1.066667rem;color: #FFFFFF;}
+.btnitem{width: 100%;	height: 1.066667rem;	border-radius: 0.533333rem;	margin-bottom: 0.36rem;}
+.btnwrapper .btnitem.disable{ background: #f0f0f0;}
+.btnwrapper .btnitem.able{ background: #e34d4b;}
+.btnwrapper .btnitem.jiedan{    background: #6e9dea;}
+
+.rulewrapper{margin: 0.35rem auto 0;width: 8.533333rem;}
+.rulewrapper .ruletitle{margin: 0 auto 0.906667rem;width: 3.5rem;display: flex;justify-content:space-between ;}
+.rulewrapper .ruletitle.active {color: #666666;	}
+.rulewrapper .ruletitle.noactive {color: #82adfa;}
+.rulewrapper .ruletitle .shotline{line-height: 0.58rem;	width: 0.4rem;}
+.rulewrapper .ruletitle .titletext{	padding: 0 0.3rem;	height: 0.586667rem;	border-radius: 0.213333rem;	text-align: center;	font-size: 0.4rem;	line-height: 0.586667rem;	background: #f8f8f8;}
+.rulewrapper .ruletext{position: relative;font-size: 0.346667rem;line-height: 50px;color: #666666;border-radius: 0.133333rem;}
+
+.agreement{ margin-top: 0.32rem; padding-left: 0.85rem;display: flex;}
+.agreement .checkboxwrapper{ width: 0.96rem; padding-left: 0.413333rem; padding-top: 0.08rem;}
+.agreement .checkboxwrapper .checkbox{ width: 0.373333rem; height: 0.3733rem; background-image: url(https://i1.yongChe.name/media/g1/M01/05/02/rBEAQ1rDXkuIHDLlAAABUcuVIg8AACBYgP__P8AAAFp041.png); background-size: 100% 100%;}
+.agreement .checkboxwrapper .checkbox.checked{ background-image: url(https://i2.yongChe.name/media/g1/M03/11/05/rBEARFrDXkyIN--NAAACvrESZzkAAGugQP__LgAAANI995.png); background-size: 100% 100%;}
+.agreement .agreementcontent{ flex: 1; font-size: 0.373333rem; line-height: 0.533333rem; color: #646464;}
+.agreement .agreementcontent .agreeitem{ color: #448ED2;}
+
+.toastmsg{ position: fixed; bottom: 35%; left: 10%; width: 80%; height: 40px; line-height: 40px; background: rgba(0,0,0,0.5); color: #fff; z-index: 30; text-align: center; border-radius: 10px;font-size: 18px;}
+.slide-up-fade-enter-active { transition: all .3s ease; }
+.slide-up-fade-leave-active { transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0); }
+.slide-up-fade-enter , .slide-up-fade-leave-to { transform: translateY(100px); opacity: 0; }
+
+.maskinner{ margin: 0 auto 0;    padding-top: 0.633rem;     width: 8.8rem;    height: 4.64rem;    background: #eeeeee;    border-radius: 0.106667rem;    font-size: 0.4rem;   color: #323232;   text-align: center;}
+.maskinner .masktitle{ font-size: 0.48rem; line-height: 0.666667rem;}
+.maskinner .masksubtitle{ width: 6.973333rem; margin: 0.333333rem auto 0.546667rem;}
+.maskinner .maskbtnwrapper{ width: 7.5rem;    margin-top: 0.9rem;}
+.maskinner .maskbtnwrapper .maskbtn{width: 100%;	height: 1.066667rem;	border-radius: 0.533333rem;	margin-bottom: 0.36rem;}
+.maskinner .maskbtnwrapper .btncancle{ border:none; color: #FFFFFF;background: #FF5252;}
+
+.ruleDetail .nav{position: absolute;top: 0;width: 100%;height: 50px;}
+.ruleDetail .nav .back{position: fixed;top: 0.1rem;width:0.9666667rem;height: 50px;
+background: url(<{asset:media/g1/M02/1E/27/rBEARFrE1vSIAeAFAAAgCXXKyFoAAMAnALJDfoAACAh332.png}>) center no-repeat; background-size: 80% 40%;
+}
+.ruleDetail .nav .tabs{height:100%; display: flex;}
+.ruleDetail .nav .tabs .navbtn{height:100%;flex: 1;}
+    </style>
+</head>
+<body>
+	<div id="app" class="appwrapper" v-cloak>
+		<div class="container" v-show="!showDeatail">
+			<header class="headerbg">
+				<div class="citywrapper"  v-show="driverState==1||(driverState==0 && joinover)||driverState==4">  <!--登录-->
+					<div class="location" >
+						<span class="locationpng"></span>
+						<span class="city" v-text="citylocation"></span>
+					</div>
+				</div>
+				<div class="sharebtn" id="sharebtn"></div>
+				<div class="detailbtn" @click="showDetailFn"></div>
+				<h1 class="title">"0佣金+阶梯返利"计划开抢 全国仅47万名额！</h1>
+				<p class="subtitle" v-show="(driverState==0 ||driverState==2 ) && !joinover">
+					全国已有<span class="joinnum" v-for="num in joinnumArr">{{num}}</span>报名成功
+				</p>
+				<p class="subtitle" v-show="driverState==1 ||(driverState==0 && joinover)">
+					全城已有<span class="joinnum" v-for="num in joinnumArr">{{num}}</span>报名成功
+				</p>
+				<p class="subtitle" v-show="joinover">
+					全城仅<span class="joinnum" v-for="num in totalnumArr">{{num}}</span>名额
+				</p>
+			</header>
+			
+			<div class="middle"  v-if="!joinover">  <!--未报名-->
+				<div class="yijiameng"  v-if="driverState!=2">
+					<div class="inputwrapper "  v-show="driverState==0">  <!--未登录-->
+						<ul class="inputlist">
+							<li class="inputitem telnumwrapper">
+								<input type="tel" v-model="telnumInput" placeholder="请填写手机号码"  maxlength="11"/>
+							</li>
+							<li class="inputitem codewrapper imgcodewrapper" v-show="needImgcode">
+								<div class="code-left">
+									<input type="text" v-model="imgcodeInput" placeholder="图形验证码" maxlength="4"/>
+								</div>
+								<div class="code-right " @click="getImgCode">
+									<img ref="imgcode" class="imgcode" :src="imgcodeSrc">
+								</div>
+							</li>
+							<li class="inputitem codewrapper msgcodewrapper" >
+								<div class="code-left">
+									<input type="tel"  v-model="msgcodeInput" placeholder="请填写验证码" maxlength="6"/>
+								</div>
+								<div class="code-right" @click="getmsgcode">
+									<div class="getcodebtn" :class="ablegetmsgcode" v-if="isActive">获取验证码</div>
+									<div class="getcodebtn" v-else="isActive">重新获取<span id="counttime">{{counttime}}</span>s</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="btnwrapper" >
+						<ul class="btnlist" >
+							<li class="btnitem" :class="ableSubmit" @click="submitInfo">
+								<div >立即开抢</div>
+							</li>
+						</ul>
+					</div>
+					<div class="agreement" >
+						<div class="checkboxwrapper">
+							<div class="checkbox" :class="{'checked':isAgree}" @click="togglecheck"></div>
+						</div>
+						<div class="agreementcontent">
+							阅读并同意
+							<a class="agreeitem" href="http://www.yongche.com/cms/page/2018/04/03175745.html">《易享车主卡》</a>
+							活动协议
+						</div>
+					</div>
+				</div>
+					
+				<div class="weijiameng" v-if="driverState==2">  <!--登录但不是司机-->
+					<div class="maskinner">
+						<div class="masktitle">
+							您还尚未加盟易到
+						</div>
+						<div class="masksubtitle">
+							请先加盟成功后方可报名
+						</div>
+						<div class="btnwrapper maskbtnwrapper">
+							<!--<div class="maskbtn btncancle " @click="closeMask">取消</div>-->
+							<div class="btnitem able" @click="jiaMeng">立即加盟</div>
+						</div>
+					</div>
+				</div>
+			</div>
+				
+			<div class="middle resultwrapper" v-if="joinover">  <!--已报名-->
+				<div  v-if="!joinfaild">
+					<div class="successwrapper">
+						<p class="sucesstitle">报名已成功</p>
+						<p class="successrank">您是当前服务城市第<span class="ranknum" v-text="ranknum"></span>位报名的司机</p>
+						<p class="successrank">待本城名额报满，即将开启您的权益</p>
+						<p class="sucesstitle" v-text="shenhetext">审核中</p>
+						<!--<p class="successrank" v-text="quanyi"></p>-->
+					</div>
+					<div class="btnwrapper">
+						<ul class="btnlist" >
+							<li class="btnitem" :class="{'able':cardStatus==0||cardStatus==3,'disable': cardStatus==1}" v-show="cardStatus!=2" @click="shangchuan">
+								<div >上传网约车双证</div>
+							</li>
+						</ul>
+					</div>
+					<p class="notice"  v-show="cardStatus!=2">是否已有网约车双证？上传获取更高返利。</p>
+				</div>
+				<div class="successwrapper"  v-if="joinfaild">
+					<p class="sucesstitle">非常抱歉，该城已报满</p>
+					<p class="successrank">系统将随机抽取超额报名司机邀请参与</p>
+					<p class="successrank">与此同时我们将为您保留下一期的优先参与权</p>
+					<p class="successrank">敬请期待！</p>
+				</div>
+			</div>
+			<div class="rulewrapper">
+				<div class="ruletitle" :class="{'active':isShowrule,'noactive':!isShowrule}" @click="showRule">
+					<div class="shotline">―</div>
+					<div class="titletext">加入规则</div>
+					<div class="shotline">―</div>
+				</div>
+				<div class="ruletext" v-show="isShowrule">
+					<div class=" rulebg rulebg1">
+						<img src="https://i1.yongche.Name/media/g2/M03/1D/2D/rBEBJVrEzGmIB8A3AAhBTm1FzBcAALkBwKe-4EACEFm897.jpg" width="100%"/>
+					</div>
+				</div>
+			</div>
+			<transition name="slide-up-fade">
+				<div class="toastmsg" v-show="showToast" v-html="toastMsg"></div>
+			</transition>
+		</div>
+		
+		<div class="ruleDetail" v-show="showDeatail">
+			<div class="nav">
+				<div class="back" @click="closeDetailFn"></div>
+				<div class="tabs">
+					<div class="navbtn navbtn1"></div>
+					<div class="navbtn navbtn2"></div>
+					<div class="navbtn navbtn3"></div>
+				</div>
+			</div>
+			<div class=" rulebg rulebg1">
+				<img src="https://i2.yongChe.Name/media/g2/M02/1D/2C/rBEBJVrDdoCIUkMFACOFkAULkAYAALjVgIBiyAAI4Wo195.jpg" width="100%"/>
+			</div>
+			<div class=" rulebg rulebg2">
+				<img src="https://i2.yongChe.Name/media/g1/M03/1E/25/rBEAQ1rDdeWIVEXyAB8jIGvi8nkAAL_7AHreYgAHyM4516.jpg" width="100%"/>
+			</div>
+			<div class=" rulebg rulebg3">
+				<img src="https://i1.yongChe.Name/media/g1/M01/1E/25/rBEAQ1rDdmWIEoOaAB8W5Cz3GUsAAL_6gMz8qMAHxb8183.jpg" width="100%"/>
+			</div>
+		</div>
+	</div>
+	
+	<script src="https://i2.Yongche.name/s/js/201712/flexible.js?1478153218"></script>
+	<script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+	<script src="https://i3.Yongche.name/s/js/201711/vue.min.js?1478153218"></script>
+	<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<!--<script src="js/index.js"></script>-->
+	<script type="text/javascript">
+	//逻辑
+new Vue({
+	el:'#app',
+	data:{
+		//domain:'https://testing.market.yongChe.Org',
+		//codeDomain:'https://testing-market.yongChe.Org/activity/Webdriver',
+		domain:'https://market.yongChe.com',
+		codeDomain:'https://market.yongche.com/activity/Webdriver',
+		driverState:0,  //0-未登录，1-登录司机，2-登录车主
+		joinover:false,  //false-未报名， true-已报名
+		joinfaild:false,  //报名结果，false
+		weijiameng:false,   //是否是加盟司机
+		citylocation:null,  //所在城市
+		telnumInput:null,   //输入的手机号，后台接口返回后赋值
+	  	msgcodeInput:null,   //输入的短信验证码
+	  	imgcodeInput:null,  //输入的图形验证码
+	  	imgcodeSrc:'https://market.yongche.com/activity/Webdriver/getCaptcha?',   //图形验证码地址
+	  	needImgcode:false, //是否需要图形验证码：false-不需要， true-需要 ，默认不需要图形验证码
+	  	counttime:60,  //获取短信验证码倒计时
+	  	isActive:true,  //获取短信验证码，是否倒计时状态，  true-不倒计时，false-倒计时状态
+	  	isAgree:true,  //是否同意各种协议 , 默认是选中
+	  	ableToClick:true,  //获取短信验证码,按钮是否可点击，阻止连续点击
+	  	isShowrule:false,  //是否展示规则
+	  	showDeatail:false,  //是否展示 活动细则
+	  	showToast:false,  //吐司提示框的展示与否  false-不展示，true-展示
+	  	toastMsg:'', //吐司提示信息
+	  	numArr:[],
+	  	totalnumArr:[],
+	  	joinnumArr:[],
+	  	card1:'',
+	  	card2:'',
+	  	cardStatus:0,  //  0-需要上传,1-审核中,2-审核成功，3-审核失败
+	  	driverid:'',
+	  	ranknum:'',
+	  	timer:null,
+	  	yibaoming:false
+	},
+	computed:{
+		ablegetmsgcode:function(){  //获取短信验证码按钮状态
+			return (this.checkTelnum()) ? 'able' : 'disable';    //手机号不合格，按钮置灰，不可点击
+		},
+		ableSubmit:function(){  //提交按钮的状态  able--->红色可点击，disable-->灰色不可点击
+			if(this.yibaoming){
+				return 'able'
+			}
+			if(this.needImgcode){
+				return (this.checkTelnum()  && this.msgcodeInput && this.imgcodeInput) ? 'able' : 'disable';
+			}
+			return (this.checkTelnum() && this.msgcodeInput ) ? 'able' : 'disable';
+		},
+	  	quanyi:function(){
+	  		if(this.cardStatus == 0 ){  
+	  			return "您当前已获得常规车主活动权益";
+	  		}else if(this.cardStatus == 2 ){  
+	  			if(this.card1 != "" && this.card2 != ""){
+		  			return "您当前已获得双证车主活动权益";
+		  		}else if(this.card1 != "" || this.card2 != ""){
+		  			return "您当前已获得单证车主活动权益";
+		  		}else{
+		  			return "您当前已获得常规车主活动权益";
+		  		}
+	  		}
+	  	},
+	  	shenhetext:function(){
+	  		if(this.cardStatus == 1){
+	  			return "审核中";
+	  		}else if(this.cardStatus == 2 ){
+	  			return "审核通过";
+	  		}else if(this.cardStatus == 3){
+	  			return "审核未通过";
+	  		}else{
+	  			return ''
+	  		}
+	  	}
+	},
+	mounted:function(){
+		this.driverid = sessionStorage.getItem('d');
+		this.checkLogin();
+	},
+	methods:{
+		checkLogin:function (){ //获取登录状态
+	  		var vm = this;
+	  		$.ajax({
+	  			type:'get',
+	  			url:vm.domain+"/miscellaneous/Driverenroll/checkLogin",
+	  			dataType:'jsonp',
+	  			xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success:function(data) {
+                	//alert("checkLogin--"+data.code) //TODO
+                	if(data.code==200){ //登录是司机
+                		vm.driverState = 1;
+                		vm.driverid = data.driver_id;
+                		if(data.isJoin==1){  //已报名
+                			vm.getstatus();
+                			vm.getCityinfo();
+                		}else{//未报名
+                			vm.joinover = false;
+                			vm.yibaoming = true;
+                		}
+                	}else if(data.code==201){//登录但不是司机--去加盟
+                		vm.driverState = 2;
+                	}else if(data.code==203){//未登录
+                		vm.driverState = 0;
+                		if(vm.driverid){
+							vm.getstatus();
+						}
+                	}
+                  	vm.getCityinfo(); //获取已报名的人数
+                  	vm.refreshData();
+                },
+                error:function(err){
+                    vm.showToastFn(err.msg)
+                }
+	  		});
+		},
+		refreshData:function(){
+			var vm = this;
+			this.timer = setInterval(function(){
+				if(vm.driverState != 4){
+					vm.getCityinfo();
+				}
+			},10000)
+		},
+		getCityinfo:function (){  //全城或全国已报名人数  ,参数不必填
+	  		var vm = this;
+	  		$.ajax({
+	  			type:'get',
+	  			url:vm.domain+"/miscellaneous/Driverenroll/getAllCount?driver_code="+vm.driverid,
+	  			dataType:'jsonp',
+	  			xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success:function(data) {
+                	//alert("getAllCount--"+data.code) //TODO
+                	//console.log("getAllCount--"+data.code)//TODO
+                	if(data.code==200){
+                		if(data.allCount=='' || data.allCount==null){
+                			vm.showToastFn('当前城市未开通活动');
+                			vm.driverState = 4; 
+                			vm.citylocation  = data.cityName;
+                		}else{
+                			vm.joinnumArr = data.allCount.toString().split('');
+                			vm.citylocation  =data.cityName;
+                		}
+                	}
+                },
+                error:function(err){
+                    vm.showToastFn(err.msg)
+                }
+	  		});
+		},
+		submitInfo:function(){
+			var vm = this;
+			if(!this.isAgree){
+				vm.showToastFn('请先阅读并同意协议')
+				return
+			}
+			if(vm.driverState==0){//未登录
+				vm.joinActivity_nologin();
+			}else if(vm.driverState==1 || vm.driverState==4){//登录司机
+				vm.joinActivity_login();
+			}
+			
+		},
+		joinActivity_nologin:function(){//未登录状态的报名接口
+			var vm = this;
+			$.ajax({
+	  			type:'type',
+	  			url:vm.domain+"/miscellaneous/Driverenroll/enrollActivity?cellphone="+ vm.telnumInput +"&code="+ vm.msgcodeInput,
+	  			dataType:'jsonp',
+	  			xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success:function(data) {
+                	//alert("enrollActivity--"+data.code) //TODO
+                	if(data.code==200){//200表示报名成功
+                		vm.driverid = data.driver_id;
+                		sessionStorage.setItem('d',data.driver_id);
+                		vm.getstatus();
+                		vm.getCityinfo();
+                	}else if(data.code==201){ //201表示不是司机--现在先用到
+                		vm.driverState=2;
+                	}else if(data.code == 404){
+                		vm.showToastFn('验证码错误')
+                	}else if(data.code == 202){  //202表示这个城市名额满了
+                		vm.driverid = data.driver_id; 
+                		vm.getstatus();
+                	}else if(data.code==203){ //城市不参与
+                		vm.showToastFn('当前城市未开通活动')
+                	}else if(data.code==204){//出租车不参与报名
+                		vm.showToastFn('出租车不参与报名')
+                	}
+                },
+                error:function(err){
+                    vm.showToastFn(err.msg)
+                }
+	  		});
+		},
+		joinActivity_login:function(){//登录状态的报名接口
+			var vm = this;
+			$.ajax({
+	  			type:'type',
+	  			url:vm.domain+"/miscellaneous/Driverenroll/joinActivity?driver_code="+vm.driverid,
+	  			dataType:'jsonp',
+	  			xhrFields: {
+                    withCredentials: true
+              	},
+              	crossDomain: true,
+                success:function(data) {
+                	//alert("joinActivity--"+data.code) //TODO
+                	if(data.code==200){//200表示报名成功
+                		vm.driverid = data.driver_id;
+                		sessionStorage.setItem('d',data.driver_id);
+                		vm.getstatus();
+                		vm.getCityinfo();
+                	}else if(data.code == 202){  //202表示这个城市名额满了
+                		vm.driverid = data.driver_id; 
+                		vm.getstatus();
+                	}else if(data.code==203){ //城市不参与
+                		vm.showToastFn('当前城市未开通活动')
+                	}else if(data.code==204){//出租车不参与报名
+                		vm.showToastFn('出租车不参与报名')
+                	}
+                },
+                error:function(err){
+                    vm.showToastFn(err.msg)
+                }
+	  		});
+		},
+		getstatus:function(){
+			var vm = this;
+			$.ajax({
+	  			type:'type',
+	  			url:vm.domain+"/miscellaneous/Driverenroll/getEnrollInfo?driver_code="+ vm.driverid ,
+	  			dataType:'jsonp',
+	  			xhrFields: {
+                      withCredentials: true
+                },
+                crossDomain: true,
+                success:function(data) {
+                  	//alert("getEnrollInfo--"+data.code) //TODO
+                	if(data.code==200){//200表示报名成功
+                		vm.joinover = true;
+                		vm.citylocation  =data.cityName;
+                		vm.card1 = data.img1;
+                		vm.card2 = data.img2;
+                		vm.cardStatus = data.status;
+                  		vm.ranknum = data.ranking;
+                		var numstr = "";
+	                	numstr += data.total_count;
+	                	console.log(numstr)
+                		vm.totalnumArr = numstr.split(''); //替换成当前城市名额
+                		console.log(vm.numArr)
+                	}else if(data.code == 202){  //202表示这个城市名额满了
+                		vm.joinover = true;
+                		vm.joinfaild = true;
+                		vm.citylocation  =data.cityName;
+                		var numstr = "";
+	                	numstr += data.total_count;
+	                	vm.totalnumArr = numstr.split('');//替换成当前城市名额
+                	}else if(data.code==206){//没有参与过报名
+                		vm.showToastFn('没有参与过报名')
+                	}
+                },
+                error:function(err){
+                    vm.showToastFn(err.msg)
+                }
+	  		});
+		},
+		getImgCode:function(){//获取图片验证码
+			this.imgcodeSrc =  this.codeDomain+'/getCaptcha?t='+new Date().getTime();
+		},
+		getmsgcode:function(){//获取短信验证码
+			if(!this.ableToClick){//是否可点击，阻止连续点击
+				return 
+			}
+			if(!this.checkTelnum()){
+				this.showToastFn('请输入正确的手机号');
+				return false;
+			}
+			if(this.needImgcode && !this.imgcodeInput){  //需要图形验证码,并且图形验证码为空
+				this.showToastFn('请输入图形验证码');
+                return false;
+			}
+			this.ableToClick = false;
+			this.sendMsgcode();//发送短信验证码
+		},
+		sendMsgcode:function(){
+			var vm = this;
+			$.ajax({
+                type:'get',
+                url:this.codeDomain+'/getCode?cellphone='+this.telnumInput+'&captcha='+this.imgcodeInput,
+                dataType:'jsonp',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success:function(data) {
+                    if(data.code==401){//需要图形验证码，图形验证码展示
+                        vm.needImgcode = true;
+                        vm.getImgCode();
+                        vm.ableToClick = true; //可以再次请求获取验证码
+                    }else if(data.code == 200){ //无需图形验证码，开始短信验证码倒计时
+						vm.msgcodeCountdown();
+                    }else if(data.code == 429) {
+                    	vm.ableToClick = true;
+                        if(vm.needImgcode){
+                           vm.getImgCode();
+                        }
+                        vm.showToastFn('请求次数过多,请稍后重试')
+                    }else if(data.code == 400){
+                    	if(!vm.needImgcode){
+                    		vm.needImgcode = true;
+                    	}else{
+                    		vm.showToastFn('图形验证码错误');
+                    	}
+                        vm.ableToClick = true;
+                        if(data.isUpdate ){
+                            vm.getImgCode();
+                        }
+                    }else if(data.code == 449) {
+                        vm.showToastFn('请求太频繁');
+                        vm.ableToClick = true;
+                        if(vm.needImgcode){
+                            vm.getImgCode();
+                        }
+                    }
+                },
+                error:function(err){
+                    vm.showToastFn(err.msg)
+                }
+            })
+		},
+		msgcodeCountdown:function(){//短信验证码发送后，倒计时
+			var vm = this;
+			vm.isActive = false;
+            var countdown = setInterval(function(){
+                if (vm.counttime <= 0) {
+                	vm.counttime = 60;
+                	vm.isActive = true;
+                	vm.ableToClick = true;
+                    clearInterval(countdown);
+                    return 
+                }
+                vm.counttime--;
+            }, 1000);
+		},
+		checkTelnum:function(){  //检测手机号是否合法
+			if(!(/^1(?:[38]\d{3}|4[57]\d{2}|5[0-35-9]\d{2}|6[68]\d{2}|7(?:[0-35-8]\d{2}|40[0-5])|9[89]\d{2})\d{6}$/.test(this.telnumInput))){
+                return false;
+            }
+            return true;
+		},
+		getQueryString:function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        },
+		togglecheck:function(){ //是否同意协议
+			this.isAgree  = !this.isAgree;
+		},
+		showRule:function(){
+			this.isShowrule = !this.isShowrule;
+		},
+		showDetailFn:function(){
+			this.showDeatail = true;
+		},
+		closeDetailFn:function(){
+			this.showDeatail = false;
+		},
+		showToastFn:function(msg){
+			var vm = this;
+			vm.showToast = true;
+     		vm.toastMsg = msg;
+     		setTimeout(function(){
+     			vm.showToast = false;
+     		},2000)
+		},
+		shangchuan:function(){  //跳转上传双证页
+			if(this.cardStatus==1){
+				return
+			}
+			window.location.href = "https://www.yongche.com/cms/page/0yongjinimg.html?driver_code="+this.driverid;
+		},
+		jiaMeng:function(){  //跳转加盟页
+			window.location.href = 'https://www.yongche.com/greencar/';
+		}
+	},
+	beforeDestroy:function(){
+		this.timer.clearInterval();
+	}
+})
+	</script>
+	<script type="text/javascript">
+		$('.rulebg2').hide();
+		$('.rulebg3').hide();
+		$('.nav').show();
+		$('.rulebg1').show();
+		$('.navbtn1').click(function(){
+			$('.rulebg').hide();
+			$('.rulebg1').show();
+		})
+		$('.navbtn2').click(function(){
+			$('.rulebg').hide();
+			$('.rulebg2').show();
+		})
+		$('.navbtn3').click(function(){
+			$('.rulebg').hide();
+			$('.rulebg3').show();
+		})
+	</script>
+<script>
+    //微信分享 
+    function ajaxShare(obj){
+    	var _protocolLink = "yidaodriver://share?";
+    	var _protocolLinkFriend = "yidaodriver://shareToFriend?";
+    	// 分享变量设置
+    	/*if(obj.isdriver){
+    		var _protocolLink = "yidaodriver://share?";
+	        var _protocolLinkFriend = "yidaodriver://shareToFriend?";
+    	}else{
+    		var _protocolLink = "userdriver://share?";
+	        var _protocolLinkFriend = "userdriver://shareToFriend?";
+	        var _protocolLinkTimeline = "userdriver://shareToTimeline?";
+    	}*/
+
+        // 分享地址
+        var shareRead_link = encodeURIComponent(obj.url);
+
+        // 分享的图片
+        var shareRead_pics = encodeURIComponent(obj.imgurl);
+
+        // 分享的标题
+        var shareRead_title = encodeURIComponent(obj.title);
+        // 分享的内容
+        var shareRead_content = encodeURIComponent(obj.description);
+        // 分享的需要生成二维码地址
+        var shareRead_codeUrl = encodeURIComponent("://m.yongche.com");
+        var shareRead_sourceType = 42; //1-截图分享 42-图文分享
+        var shareRead_callback = "share_callback";
+
+        var Tools = {
+            shareThisPage:function(){
+                var _str = "link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType+"&callback="+shareRead_callback+"&codeUrl="+shareRead_codeUrl;
+                var _tmpOpenLink = _protocolLink + _str;
+                window.location.href = _tmpOpenLink;
+            },
+            shareThisPageToFriend:function(){
+                var _str = "link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType+"&callback="+shareRead_callback+"&codeUrl="+shareRead_codeUrl;
+                var _tmpOpenLink = _protocolLinkFriend + _str;
+                window.location.href = _tmpOpenLink;
+            },
+            shareThisPageToTimeline:function(){
+                var _str = "link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType+"&callback="+shareRead_callback+"&codeUrl="+shareRead_codeUrl;
+                var _tmpOpenLink = _protocolLinkTimeline + _str;
+                window.location.href = _tmppenLOink;
+            }
+        };
+        var _str = "link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType+"&from=iframe&callback="+shareRead_callback;
+        var _tmpOpenLink = _protocolLink + _str;
+        console.log(_tmpOpenLink);
+
+        document.getElementById(obj.sharebtn).addEventListener("click", function(){
+            ga('send', 'event', obj.sharebtn, 'click', 'sijibaoming');
+            Tools.shareThisPage();
+        });
+    }
+    
+    ajaxShare({
+    	isdriver:true,
+    	sharebtn:'sharebtn',
+        url:'https://www.yongche.com/cms/page/wxPreHot.html?',
+        imgurl:"https://i1.yongche.Name/media/g1/M04/1E/26/rBEAQ1rDhDCIQQIOAAAetaL4zfYAAL_8gP-JQwAAB7N221.png",
+        title:'易享车主卡0元抢购即将开启！',
+        description:'0佣金+最高15%阶梯返利，每月多赚6000元！'
+    })
+
+</script>
+	
+	<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-18761483-4', 'auto');
+    ga('send', 'pageview');
+</script>
+</body>
+</html>
